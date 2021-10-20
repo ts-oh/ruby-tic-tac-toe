@@ -92,9 +92,8 @@ end
 # Create a new grid object to play tic-tac-toe
 game_grid = Board.new
 
-def check_valid_move(valid_move?)
-  if valid_move?(player_position, game_grid) == true
-  end
+def check_draw?(game_grid)
+  game_grid.grid.all?{|grid| grid == 'X' || grid =='O'}
 end
 
 # Method to check for valid move
@@ -118,26 +117,32 @@ def turn(game_grid, player1, player2)
     if counter.even?
       puts "#{player1.name}'s turn!"
       player_position = gets.strip
-      check_valid_move(valid_move?)
-      game_grid.grid[player_position.to_i - 1] = player.mark
-      counter += 1
-      system('clear')
-      puts game_grid.display_grid
+      if valid_move?(player_position, game_grid) == true
+          game_grid.grid[player_position.to_i - 1] = player1.mark
+          counter += 1
+          system('clear')
+          puts game_grid.display_grid
+          if check_draw?(game_grid) == true
+            return puts "it's a draw!"
+          end
+        end
     # if player 1 is not even (false) then, player 2 turn and place mark
     else
       puts "#{player2.name}'s turn!"
       player_position = gets.strip
-      check_valid_move(valid_move?)
-      game_grid.grid[player_position.to_i - 1] = player.mark
-      counter += 1
-      system('clear')
-      puts game_grid.display_grid
+      if valid_move?(player_position, game_grid) == true
+        game_grid.grid[player_position.to_i - 1] = player2.mark
+        counter += 1
+        system('clear')
+        puts game_grid.display_grid
+        if check_draw?(game_grid) == true
+          return puts "it's a draw!"
+        end
+      end
     end
   end
 end
 
 turn(game_grid, player1, player2)
-
-
 
 
