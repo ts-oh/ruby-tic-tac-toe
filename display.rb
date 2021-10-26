@@ -1,4 +1,4 @@
-require_relative 'player.rb'
+require_relative 'player'
 require 'io/console'
 require 'pry-byebug'
 
@@ -23,7 +23,7 @@ module Display
   end
 
   def welcome_players(player)
-		puts "\nHello #{player.name}! You are '#{player.mark}'"
-		puts "\n\n"
-	end
+    puts "\nHello #{player.name}! You are '#{player.mark}'"
+    puts "\n\n"
+  end
 end

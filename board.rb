@@ -1,5 +1,5 @@
-require_relative 'player.rb'
-require_relative 'display.rb'
+require_relative 'player'
+require_relative 'display'
 require 'pry-byebug'
 
 class Board
@@ -23,11 +23,11 @@ end
 WIN_INDEX = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]].freeze
 
 def check_win?(game_grid)
-	WIN_INDEX.detect do |i|
-		if game_grid.grid[i[0]] == 'X' && game_grid.grid[i[1]] == 'X' && game_grid.grid[i[2]] == 'X' || game_grid.grid[i[0]] == 'O' && game_grid.grid[i[1]] == 'O' && game_grid.grid[i[2]] == 'O'  
-			return true 
-		end
-	end
+  WIN_INDEX.detect do |i|
+    if game_grid.grid[i[0]] == 'X' && game_grid.grid[i[1]] == 'X' && game_grid.grid[i[2]] == 'X' || game_grid.grid[i[0]] == 'O' && game_grid.grid[i[1]] == 'O' && game_grid.grid[i[2]] == 'O'
+      return true
+    end
+  end
 end
 
 def check_draw?(game_grid)
@@ -50,16 +50,16 @@ def turn(game_grid, player1, player2)
       puts "#{player1.name}'s turn!"
       player_position = gets.strip
       if valid_move?(player_position, game_grid) == true
-          game_grid.grid[player_position.to_i - 1] = player1.mark
-          counter += 1
-          system('clear')
-          puts game_grid.display_grid
-          if check_win?(game_grid) == true
-            return puts "#{player1.name} is the winner!"
-          elsif check_draw?(game_grid) == true
-            return puts "it's a draw!"
-          end
+        game_grid.grid[player_position.to_i - 1] = player1.mark
+        counter += 1
+        system('clear')
+        puts game_grid.display_grid
+        if check_win?(game_grid) == true
+          return puts "#{player1.name} is the winner!"
+        elsif check_draw?(game_grid) == true
+          return puts "it's a draw!"
         end
+      end
     else
       puts "#{player2.name}'s turn!"
       player_position = gets.strip
