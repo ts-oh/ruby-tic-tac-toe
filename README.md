@@ -1,1 +1,1 @@
-# tictactoe_ruby
+# Tic-Tac-Toe Ruby
