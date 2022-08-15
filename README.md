@@ -6,7 +6,7 @@
 
 **Instructions:**
 
-Click on the green button run ▶️ button to play the game.
+Click on the run ▶️ button to play the game.
 
 **Assignment:**
 
