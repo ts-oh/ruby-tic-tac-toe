@@ -1,12 +1,12 @@
-# CLI Ruby Tic-Tac-Toe
+# ❎ CLI Ruby Tic-Tac-Toe 🅾️
 
 **Live Demo on Replit:**
 
-[Click here to play](https://replit.com/@tsoh/)
+[Click here to play](https://replit.com/@tsoh/Ruby-CLI-Tic-Tac-Toe)
 
 **Instructions:**
 
-Click on the green button run ▶️ button to play.
+Click on the green button run ▶️ button to play the game.
 
 **Assignment:**
 
