@@ -1,12 +1,13 @@
 require_relative 'player'
 require_relative 'display'
-require 'pry-byebug'
+require 'colorize'
 
 class Board
   attr_accessor :grid
 
   def initialize
     @grid = %w[1 2 3 4 5 6 7 8 9]
+    @player_position = nil
   end
 
   def display_grid
@@ -24,54 +25,63 @@ WIN_INDEX = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [
 
 def check_win?(game_grid)
   WIN_INDEX.detect do |i|
-    if game_grid.grid[i[0]] == 'X' && game_grid.grid[i[1]] == 'X' && game_grid.grid[i[2]] == 'X' || game_grid.grid[i[0]] == 'O' && game_grid.grid[i[1]] == 'O' && game_grid.grid[i[2]] == 'O'
+    if game_grid.grid[i[0]] == 'X'.green && game_grid.grid[i[1]] == 'X'.green && game_grid.grid[i[2]] == 'X'.green || game_grid.grid[i[0]] == 'O'.red && game_grid.grid[i[1]] == 'O'.red && game_grid.grid[i[2]] == 'O'.red
       return true
     end
   end
 end
 
 def check_draw?(game_grid)
-  game_grid.grid.all? { |grid| grid == 'X' || grid =='O' }
+  game_grid.grid.all? { |grid| grid == 'X'.green || grid == 'O'.red }
 end
 
 def valid_move?(player_position, game_grid)
-  if game_grid.grid[player_position.to_i - 1] == 'X' || game_grid.grid[player_position.to_i - 1] == 'O'
+  if game_grid.grid[player_position - 1] == 'X'.green || game_grid.grid[player_position - 1] == 'O'.red
     false
   else
     true
   end
 end
 
+def check_valid_input
+  @player_position = gets.strip.to_i
+  unless @player_position.between?(0, 10)
+    puts 'please enter valid number between 1-9: '.light_magenta
+    @player_position = gets.strip.to_i
+  end
+end
+
 def turn(game_grid, player1, player2)
   puts game_grid.display_grid
   counter = 0
+
   loop do
     if counter.even?
-      puts "#{player1.name}'s turn!"
-      player_position = gets.strip
-      if valid_move?(player_position, game_grid) == true
-        game_grid.grid[player_position.to_i - 1] = player1.mark
+      player_turn(player1.name)
+      check_valid_input
+      if valid_move?(@player_position, game_grid) == true
+        game_grid.grid[@player_position - 1] = player1.mark
         counter += 1
         system('clear')
         puts game_grid.display_grid
         if check_win?(game_grid) == true
-          return puts "#{player1.name} is the winner!"
+          return winner(player1.name)
         elsif check_draw?(game_grid) == true
-          return puts "it's a draw!"
+          return draw_message
         end
       end
     else
-      puts "#{player2.name}'s turn!"
-      player_position = gets.strip
-      if valid_move?(player_position, game_grid) == true
-        game_grid.grid[player_position.to_i - 1] = player2.mark
+      player_turn(player2.name)
+      check_valid_input
+      if valid_move?(@player_position, game_grid) == true
+        game_grid.grid[@player_position - 1] = player2.mark
         counter += 1
         system('clear')
         puts game_grid.display_grid
         if check_win?(game_grid) == true
-          return puts "#{player2.name} is the winner!"
+          return winner(player2.name)
         elsif check_draw?(game_grid) == true
-          return puts "it's a draw!"
+          return draw_message
         end
       end
     end
