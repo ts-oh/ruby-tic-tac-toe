@@ -22,7 +22,8 @@ In your command line clone this repo by typing or copy pasting following command
 If you have ruby installed:
 
 1. cd into the cloned tic-tac-toe directory: `cd tictactoe_ruby`
-2. Run the game by typing: `ruby main.rb`
+2. Install ruby gem dependency: `gem install colorize`
+3. Run the game by typing: `ruby main.rb`
 
 Else:
 [Install ruby](https://www.ruby-lang.org/en/documentation/installation/)
