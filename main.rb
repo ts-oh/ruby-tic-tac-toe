@@ -2,7 +2,7 @@ require_relative 'board'
 require_relative 'display'
 require_relative 'player'
 
-loop do
+def main
   include Display
      
   welcome_message
@@ -24,3 +24,5 @@ loop do
   turn(game_grid, player1, player2)
 
 end
+
+main()

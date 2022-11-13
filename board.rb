@@ -51,10 +51,23 @@ def check_valid_input
   end
 end
 
+def play_again
+  play_again_display()
+  again_input = gets.strip
+  if again_input == "y"
+    main()
+  elsif again_input == "n"
+    print "\n"
+    print "Good Bye! 👋\n".red
+    return print "\n"
+  else
+    play_again()
+  end
+end
+
 def turn(game_grid, player1, player2)
   puts game_grid.display_grid
   counter = 0
-
   loop do
     if counter.even?
       player_turn(player1.name)
@@ -65,9 +78,11 @@ def turn(game_grid, player1, player2)
         system('clear')
         puts game_grid.display_grid
         if check_win?(game_grid) == true
-          return winner(player1.name)
+          winner(player1.name)
+          return play_again()
         elsif check_draw?(game_grid) == true
-          return draw_message
+          draw_message
+          return play_again()
         end
       end
     else
@@ -79,9 +94,11 @@ def turn(game_grid, player1, player2)
         system('clear')
         puts game_grid.display_grid
         if check_win?(game_grid) == true
-          return winner(player2.name)
+          winner(player2.name)
+          return play_again()
         elsif check_draw?(game_grid) == true
-          return draw_message
+          draw_message
+          return play_again()
         end
       end
     end

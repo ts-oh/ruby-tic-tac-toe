@@ -5,9 +5,9 @@ require 'colorized_string'
 system('clear')
 
 module Display
-  def welcome_message
-    ColorizedString.colors  
-
+  def welcome_message   
+    ColorizedString.colors
+    print("Hello! 🤗 \n\n\n")
     puts <<-'EOF'
      _______ _        _______           _______
     |__   __(_)      |__   __|         |__   __|
@@ -17,12 +17,13 @@ module Display
        |_|  |_|\___|    |_|\__,_|\___|    |_|\___/ \___|
     
     EOF
-    print "\n\n\n"
+    
+    print "\n"
     print "Rules: \n\n".light_yellow
     print "1. Two players, X and O take turns filling in 3x3 grid spaces. \n"
     print "2. The first player who places 3-marks wins! \n"
     print "3. Marks must be either horizontal, vertical, or diagonal. \n\n\n"
-    print "Press any key to continue...".yellow
+    print "Press any key to continue...".red
     $stdin.getch
     system('clear')
   end
@@ -39,7 +40,7 @@ module Display
   end
 
   def winner(player)
-    print "#{player} is the winner! \n\n\n".cyan
+    print "#{player} is the winner! \n\n".magenta
   end
 
   def player_turn(player)
@@ -49,4 +50,9 @@ module Display
   def draw_message
     print "The game is a draw! \n\n\n".magenta
   end
+
+  def play_again_display
+    print "Would you like to play again? enter 'y'[Yes] or 'n'[No]: ".cyan
+  end
+  
 end
