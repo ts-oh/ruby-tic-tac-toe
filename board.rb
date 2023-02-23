@@ -68,38 +68,24 @@ end
 def turn(game_grid, player1, player2)
   puts game_grid.display_grid
   counter = 0
+
   loop do
-    if counter.even?
-      player_turn(player1.name)
-      check_valid_input
-      if valid_move?(@player_position, game_grid) == true
-        game_grid.grid[@player_position - 1] = player1.mark
-        counter += 1
-        system('clear')
-        puts game_grid.display_grid
-        if check_win?(game_grid) == true
-          winner(player1.name)
-          return play_again()
-        elsif check_draw?(game_grid) == true
-          draw_message
-          return play_again()
-        end
-      end
-    else
-      player_turn(player2.name)
-      check_valid_input
-      if valid_move?(@player_position, game_grid) == true
-        game_grid.grid[@player_position - 1] = player2.mark
-        counter += 1
-        system('clear')
-        puts game_grid.display_grid
-        if check_win?(game_grid) == true
-          winner(player2.name)
-          return play_again()
-        elsif check_draw?(game_grid) == true
-          draw_message
-          return play_again()
-        end
+    current_player = counter.even? ? player1 : player2
+    player_turn(current_player.name)
+    check_valid_input
+
+    if valid_move?(@player_position, game_grid)
+      game_grid.grid[@player_position - 1] = current_player.mark
+      counter += 1
+      system('clear')
+      puts game_grid.display_grid
+
+      if check_win?(game_grid)
+        winner(current_player.name)
+        return play_again()
+      elsif check_draw?(game_grid)
+        draw_message
+        return play_again()
       end
     end
   end
