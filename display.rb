@@ -2,10 +2,11 @@ require_relative 'player'
 require 'io/console'
 require 'colorize'
 require 'colorized_string'
-system('clear')
 
 module Display
-  def welcome_message   
+  
+  def welcome_message
+    clear_screen()   
     ColorizedString.colors
     print("Hello! 🤗 \n\n\n")
     puts <<-'EOF'
@@ -25,13 +26,13 @@ module Display
     print "3. Marks must be either horizontal, vertical, or diagonal. \n\n\n"
     print "Press any key to continue...".red
     $stdin.getch
-    system('clear')
+    clear_screen()
   end
 
   def press_any_key
     print "If you are ready, press any key to start Tic-Tac-Toe! \n".yellow
     $stdin.getch
-    system('clear')
+    clear_screen()
   end
 
   def welcome_players(player)
@@ -54,5 +55,9 @@ module Display
   def play_again_display
     print "Would you like to play again? enter 'y'[Yes] or 'n'[No]: ".cyan
   end
-  
+
+  def clear_screen()
+    system('clear')
+  end
+
 end

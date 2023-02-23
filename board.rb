@@ -55,6 +55,7 @@ def play_again
   play_again_display()
   again_input = gets.strip
   if again_input == "y"
+    clear_screen()
     main()
   elsif again_input == "n"
     print "\n"
@@ -77,7 +78,7 @@ def turn(game_grid, player1, player2)
     if valid_move?(@player_position, game_grid)
       game_grid.grid[@player_position - 1] = current_player.mark
       counter += 1
-      system('clear')
+      clear_screen()
       puts game_grid.display_grid
 
       if check_win?(game_grid)
